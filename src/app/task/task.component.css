@@ -1,0 +1,62 @@
+@import '~@angular/material/theming';
+
+.example-container {
+    margin-left: 8px;
+  }
+  
+  .example-container {
+    width: 220px;
+  }
+  
+  .example-container form {
+    margin-bottom: 20px;
+  }
+  
+  .example-container form > * {
+    margin: 5px 5px;
+  }
+
+  .field-container{
+    margin: 15px !important;
+  }
+
+  .mat-button.mat-primary .mat-button-focus-overlay {
+    background-color: blue;
+  }
+
+  .h4 {
+    background-color: #3f51b5;
+  }
+
+  .mat-form-field--inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.mat-form-field--inline .mat-form-field {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.mat-form-field--inline .mat-form-field:nth-child(1) {
+    margin-right: 10px;
+}
+
+:host /deep/ .mat-list-item-content {
+  padding: 0!important;
+}
+
+.card-container {
+  /*  not needed styles to reflect it */ 
+  background: blue;
+  padding: 10px;
+  color: white;
+  width: 500px;
+
+  /* needed styles below */
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}

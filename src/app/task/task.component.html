@@ -1,0 +1,79 @@
+  
+<mat-card class="card-container" style="text-align: center !important;margin-top: 20px;;">
+  <mat-card-title > To Do List App </mat-card-title>
+</mat-card>
+
+  
+  <div class="example-container">
+  <mat-list>
+    <form [formGroup]="formGroup">
+    <mat-form-field hintLabel="Max 100 characters" appearance="fill" style=" margin: 15px !important;">
+    <mat-label>Titolo</mat-label>
+    <textarea class="field-container" matInput maxlength="100" [formControl]="titleValidator" required #itemTitle></textarea>
+    <mat-hint align="end">{{itemTitle.value?.length || 0}}/10</mat-hint>
+    <mat-error *ngIf="titleValidator.hasError('required')">You must make a selection</mat-error>
+  </mat-form-field>
+  <mat-form-field hintLabel="Max 500 characters" appearance="fill" style=" margin: 15px !important;">
+    <mat-label>Descrizione</mat-label>
+    <textarea matInput maxlength="500" [formControl]="descriptionValidator" required #itemDescription></textarea>
+    <mat-hint align="end">{{itemDescription.value?.length || 0}}/10</mat-hint>
+    <mat-error *ngIf="descriptionValidator.hasError('required')">You must make a selection</mat-error>
+  </mat-form-field>
+    <mat-form-field appearance="fill"
+    [floatLabel]="true" style=" margin: 15px !important;">
+      <mat-label>Stato</mat-label>
+      <mat-select [formControl]="statusSelected" [(value)]="selectedStatus" required>
+          <mat-option *ngFor="let item of statusArray" [value]="item">{{item.value}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="statusSelected.hasError('required')">You must make a selection</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" style=" margin: 15px !important;">
+      <mat-label>Data di scadenza</mat-label>
+      <input matInput required [formControl]="dateValidator" [matDatepicker]="picker" #itemDate>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker [startAt]="date" #picker></mat-datepicker>
+      <mat-error *ngIf="descriptionValidator.hasError('required')">You must make a selection</mat-error>
+
+  </mat-form-field>
+      <button (click)="onAdd(itemTitle, itemDescription, selectedStatus, itemDate)" mat-raised-button color="primary" style="margin:15px">Aggiungi</button>
+  </form>
+</mat-list>
+</div>
+
+  <mat-divider></mat-divider>
+  <h2 style="margin-top:15px;">Tasks</h2>
+
+   <div>
+    <mat-list>
+      <mat-list-item style=" margin-top: 15px !important;margin-bottom:60px; padding-bottom:15px !important;" *ngFor="let item of toDoListArray">
+        <mat-form-field style="margin-right: 30px !important;" appearance="fill">
+          <mat-label>Titolo</mat-label>
+          <textarea matInput value="{{item.name}}"></textarea>
+        </mat-form-field>
+        <mat-form-field style="margin-right: 30px !important;" appearance="fill">
+          <mat-label>Descrizione</mat-label>
+          <textarea matInput value="{{item.description}}"></textarea>
+        </mat-form-field>
+        <mat-form-field style=" margin-right: 30px !important;" appearance="fill"
+    [floatLabel]="true">
+      <mat-label>{{item.status.value}}</mat-label>
+      <mat-select matNativeControl [(value)]="item.status" required>
+          <mat-option *ngFor="let status of statusArray" [value]="status">{{status.value}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="statusSelected.hasError('required')">You must make a selection</mat-error>
+    </mat-form-field>
+    <mat-form-field style="margin-right: 15px !important;" appearance="fill">
+      <mat-label>Data di scadenza</mat-label>
+      <input matInput required [formControl]="dateValidator" [matDatepicker]="picker" #itemDate>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker [startAt]="date" #picker></mat-datepicker>
+  </mat-form-field>
+  <div>
+    <button (click)="update(item)" mat-raised-button color="primary" style="margin:15px">Aggiorna</button>
+  </div>
+        <mat-icon style="cursor: pointer;margin:15px" (click)="onDelete(item)">delete</mat-icon>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </div>
+
